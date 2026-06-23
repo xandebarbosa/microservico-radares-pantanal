@@ -30,7 +30,7 @@ public class MapaCoordenadasService {
 
             // Converte chaves para maiusculo para garantir o JOIN seguro
             rawMap.forEach((k, v) -> coordenadas.put(k.toUpperCase().replace("", ""), v));
-            log.info("✅ {} localizações da SPVias carregadas.", coordenadas.size());
+            log.info("✅ {} localizações da Pantanal carregadas.", coordenadas.size());
         } catch (Exception e) {
             log.error("❌ Erro ao carregar localizações: {}", e.getMessage());
         }

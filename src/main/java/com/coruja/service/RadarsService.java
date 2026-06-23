@@ -212,7 +212,7 @@ public class RadarsService {
     }
 
     /**
-     * Retorna a rodovia fixa da concessionária, espelhando o contrato de tabela do SPVias.
+     * Retorna a rodovia fixa da concessionária, espelhando o contrato de tabela do Pantanal.
      */
     public List<PracaDTO> listarPracas() {
         return List.of(new PracaDTO( 1L, ""));
@@ -241,7 +241,7 @@ public class RadarsService {
 
     private MongoCollection<Document> getCollection() {
         MongoDatabase db = mongoClient.getDatabase(databaseName);
-        return db.getCollection("SPVias");
+        return db.getCollection("Pantanal");
     }
 
     public List<PracaDTO> listarLocaisComoRodovias() {
@@ -273,7 +273,7 @@ public class RadarsService {
                 .praca(entity.getLocal())
                 .rodovia(entity.getLocal())
                 .sentido(transformarSentido(entity.getSentido()))
-                .concessionaria("SPVias")
+                .concessionaria("Pantanal")
                 .build();
     }
 
@@ -296,7 +296,7 @@ public class RadarsService {
      * Segue o padrão de retorno do microserviço Cart, mas consome o JSON local.
      */
     public List<RadarLocationDTO> getAllLocations() {
-        log.info("🗺️ [SPVias] Gerando localizações fixas a partir do mapeamento JSON");
+        log.info("🗺️ [Pantanal] Gerando localizações fixas a partir do mapeamento JSON");
 
         // O mapaCoordenadasService já carrega o localizacoes-rondon.json no startup
         return mapaCoordenadas.getAllCoordenadas().entrySet().stream()
@@ -307,7 +307,7 @@ public class RadarsService {
                     long numericId = Math.abs((long) entry.getKey().hashCode());
                     dto.setId(numericId);
 
-                    dto.setConcessionaria("SPVias");
+                    dto.setConcessionaria("Pantanal");
                     dto.setPraca(entry.getKey());
                     dto.setLatitude(entry.getValue().latitude);
                     dto.setLongitude(entry.getValue().longitude);
